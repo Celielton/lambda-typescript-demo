@@ -1,0 +1,25 @@
+service: lambda-typescript-demo
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+
+package:
+  excludeDevDependencies: true
+  individually: true
+  
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+
+functions:
+  hello:
+    handler: src/handler/hello.hello
+    description: Hello world function
+    memorySize: 256
+    events:
+        - http:
+            path: /hello
+            method: get
+            cors: true
